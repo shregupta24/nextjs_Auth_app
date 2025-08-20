@@ -4,7 +4,7 @@ import {useRouter} from "next/navigation"
 import { useState } from "react"
 import toast, { Toast } from "react-hot-toast"
 import Link from "next/link"
-export default function profilePage(){
+export default function ProfilePage(){
     const router = useRouter()
 
     const[data,setData] = useState("Nothing")

@@ -10,7 +10,7 @@ export default function VerifyEmailPage(){
     const[verified,setVerified] = useState(false);
     const[error,setError] = useState(false);
 
-    const verifyUserEmail = async() =>{
+    const VerifyUserEmail = async() =>{
         try {
             await axios.post("/api/users/nodemailer",{token})
             setVerified(true);
