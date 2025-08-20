@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
+
 //resuable function to either send verification mail or forget password mail
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
