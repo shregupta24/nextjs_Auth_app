@@ -3,10 +3,11 @@
 import axios from "axios"
 import { useState } from "react"
 
-export default function forgetPassword(){
-    const[email,setEmail]=useState("")
+export default function ForgetPassword(){
+    const[email,setEmail] = useState("")
     const forgetPass = async()=>{
-        const response = await axios.post("/api/users/forgetPassword",email)
+        const response = await axios.post("/api/users/forgetPassword",{email})
+        console.log(response)
     }
     return (
         <div>
