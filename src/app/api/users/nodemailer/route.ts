@@ -2,22 +2,28 @@ import User from "@/models/userModel";
 import { connect } from "@/dbconfig/dbconfig";
 import { NextRequest , NextResponse } from "next/server";
 
+//flow 
+// User signs up → gets email with a special verification token.
+// They click the link → this API route receives that token.
+// If the token is valid → user becomes "verified" in the database.
+
 connect()
 
 export async function POST(request : NextRequest){
     try {
        const reqBody = await request.json() 
-       const {token} = reqBody
+       const {token} = reqBody //this token we are getting from frontend 
        console.log(token);
 
-       const user = await User.findOne({verifyToken : token,verifyTokenExpiry : {$gt : Date.now()}})
+       const user = await User.findOne({verifyToken : token,verifyTokenExpiry : {$gt : Date.now()}}) //find user
+       //on the basis of token and the token should have expiry dtae greater than today's date.
         console.log(user);
        if(!user){
         return NextResponse.json({message : "Invalid Token"},{status:404})
        }
 
        user.isVerified = true;
-       user.verifyToken = undefined;
+       user.verifyToken = undefined;//after verifiying the user we will delete the token so that it can't be resued
        user.verifyTokenExpiry = undefined;
        await user.save();
 

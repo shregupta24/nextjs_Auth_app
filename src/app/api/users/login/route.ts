@@ -1,10 +1,9 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/userModel";
-import { error } from "console";
 import bcryptjs from "bcryptjs";
 import { connect } from "@/dbconfig/dbconfig";
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 connect()
 export async function POST(request : NextRequest){
     try {
@@ -30,8 +29,8 @@ export async function POST(request : NextRequest){
             email:user.email
         }
 
-        const token = await jwt.sign(tokenData,process.env.TOKEN_SECRET , {expiresIn : "1d"})
-        
+        const token = jwt.sign(tokenData,process.env.TOKEN_SECRET , {expiresIn : "1d"})
+        console.log(token);
         const response = NextResponse.json({message:"User logged in successfully!"} , {status:200})
         response.cookies.set("token" , token , {
             httpOnly : true

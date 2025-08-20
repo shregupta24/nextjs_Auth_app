@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
-
+//resuable function to either send verification mail or forget password mail
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     //create a hashed token
@@ -10,7 +10,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     if (emailType === "VERIFY") {
       await User.findByIdAndUpdate(userId, {
         verifyToken: hashedToken,
-        verifyTokenExpiry: Date.now() + 3600000,
+        verifyTokenExpiry: Date.now() + 3600000, //sets expiry time 1 hour from now
       });
     } else if (emailType === "RESET") {
       await User.findByIdAndUpdate(userId, {

@@ -59,6 +59,7 @@ export default function loginPage(){
                 value={user.password}
                 onChange={(e) =>setUser({...user,password : e.target.value})} 
             />
+            <span><Link href="/forgetPassword">Forget Password</Link></span>
             <button onClick={onLogin}
             className="cursor-pointer p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
             >
